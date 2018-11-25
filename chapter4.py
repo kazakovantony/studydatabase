@@ -63,4 +63,6 @@ text("select r.hotel_no, AVG(r.price) from Rooms as r JOIN Hotels as h ON h.hote
 """group by - type of aggregation where we cannot see other columns then column on which we do aggregation,
  due to fact we group lots of columns and do not know which exactly row columns to show """
 
-
+"""Task 2. How many bookings were registered during august """
+text("select COUNT(*) from Bookings as b JOIN Hotels as h ON h.hotel_no = b.hotel_no JOIN Rooms as r ON r.hotel_no = h.hotel_no AND b.room_no = r.room_no WHERE EXTRACT(MONTH FROM b.date_from) = 8")
+""" several joins make our table bigger, we can add any amount of conditions inside on keyword"""
