@@ -4,6 +4,7 @@ import sqlalchemy.engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
+from sqlalchemy import text
 
 print(sqlalchemy.__version__)
 
@@ -41,6 +42,7 @@ class Booking(Base):
 
 class Guest(Base):
     __tablename__ = 'guests'
+
     guest_no = Column(Integer, primary_key=True)
     guest_name = Column(String)
     guest_address = Column(String)
@@ -55,3 +57,10 @@ Session = sessionmaker(bind=engine)
 session = Session()
 session.add(new_hotel)
 session.commit()
+
+"""Task 1. Average room price in hotel """
+text("select r.hotel_no, AVG(r.price) from Rooms as r JOIN Hotels as h ON h.hotel_no = r.hotel_no GROUP BY r.hotel_no")
+"""group by - type of aggregation where we cannot see other columns then column on which we do aggregation,
+ due to fact we group lots of columns and do not know which exactly row columns to show """
+
+
